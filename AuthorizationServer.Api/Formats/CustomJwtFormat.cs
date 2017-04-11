@@ -39,7 +39,11 @@ namespace AuthorizationServer.Api.Formats
   
             var keyByteArray = TextEncodings.Base64Url.Decode(symmetricKeyAsBase64);
 
-            var signingKey = new HmacSigningCredentials(keyByteArray);
+            //below method is out of version.
+            //var signingKey = new HmacSigningCredentials(keyByteArray);
+            
+            //replace upon code with below line(inherit Microsoft.IdentityModel.Tokens).
+            var signingKey = new SigningCredentials(new SymmetricSecurityKey(keyByteArray), "HS256");
 
             var issued = data.Properties.IssuedUtc;
             var expires = data.Properties.ExpiresUtc;
